@@ -1,0 +1,13 @@
+{
+    "name": "myauthenticationproject",
+    "version": "1.0.0",
+    "description": "Authentication project",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "keywords": [],
+    "author": "Mohammed Shakir",
+    "license": "ISC"
+}
