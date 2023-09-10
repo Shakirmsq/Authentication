@@ -5,9 +5,15 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node index.js"
+        "start": "nodemon index.js"
     },
     "keywords": [],
     "author": "Mohammed Shakir",
-    "license": "ISC"
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.18.2",
+        "mongoose": "^7.5.0",
+        "nodemon": "^3.0.1",
+        "url": "^0.11.1"
+    }
 }

@@ -1,22 +1,28 @@
-const http = require("http");
-const fs = require("fs");
-//create an server
-const myServer = http.createServer((req, res) => {
-    const log = `${Date.now()}: ${req.url} New Request REcieved\n`;
-    fs.appendFile('log.txt', log, (err, data) => {
-        switch (req.url) {
-            case '/':
-                res.end("Hello From Server Again at HomePage");
-                break;
-            case '/about':
-                res.end("I am Mohammed Shakir");
-                break;
-            default:
-                res.end("404 Not found");
-        }
+const express = require("express");
 
-    })
-});
 
-//Create a door(port) on which server will run
-myServer.listen(8000, () => console.log("Server Started"));
+//Connection mongodb
+const { connectMongoDb} = require("./connection");
+
+//import middleware(no need to mention index file by default it takes it)
+const{ logReqRes } = require("./middlewares");
+
+//import routes
+const userRouter = require("./routes/user");
+
+const app = express();
+const PORT = 8000;
+
+//Connection Mongodb url
+connectMongoDb("mongodb://127.0.0.1:27017/authentication-app-1").then(()=>console.log("MongoDb Connected !"));
+
+// 01 Middleware(plugin) (inbuilt)
+app.use(express.urlencoded({ extended: false }));
+
+// 02 (creating a log)sent request after passing by this middleware
+app.use(logReqRes("log.txt"));
+
+// Routes
+app.use("/api/users",userRouter);
+
+app.listen(PORT, () => console.log(`Server Started at PORT:${PORT}`));
